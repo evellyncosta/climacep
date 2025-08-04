@@ -11,3 +11,7 @@ services:
       - PORT=8080
       - WEATHER_API_KEY=${WEATHER_API_KEY}
     restart: always
+    volumes:
+      - ./:/app/src
+    tty: true
+    stdin_open: true

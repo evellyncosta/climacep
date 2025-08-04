@@ -60,6 +60,9 @@ func (s *ViaCEPService) GetLocationByCEP(cep string) (*models.ViaCEPResponse, er
 	if cepResponse.Erro {
 		return nil, ErrCEPNotFound
 	}
+	
+	// Print debug information
+	fmt.Printf("ViaCEP Response for %s: City=%s\n", cep, cepResponse.Localidade)
 
 	return &cepResponse, nil
 }

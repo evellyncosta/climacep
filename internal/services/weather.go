@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"net/url"
 	"time"
 
 	"github.com/evellyn/climacep/internal/models"
@@ -34,15 +35,29 @@ func NewWeatherService(apiKey string) *WeatherService {
 
 // GetWeatherByCity retrieves weather information by city name
 func (s *WeatherService) GetWeatherByCity(city string) (*models.WeatherAPIResponse, error) {
-	url := fmt.Sprintf("https://api.weatherapi.com/v1/current.json?key=%s&q=%s&aqi=no", s.apiKey, city)
+	// URL encode the city name to handle special characters
+	encodedCity := url.QueryEscape(city)
+	
+	url := fmt.Sprintf("https://api.weatherapi.com/v1/current.json?key=%s&q=%s&aqi=no", s.apiKey, encodedCity)
+	
+	// Print debug information
+	fmt.Printf("WeatherAPI Request: URL=%s\n", url)
+	fmt.Printf("WeatherAPI Key: %s\n", s.apiKey)
+	fmt.Printf("Original City: %s, Encoded City: %s\n", city, encodedCity)
 
 	resp, err := s.client.Get(url)
 	if err != nil {
+		fmt.Printf("WeatherAPI Error: %v\n", err)
 		return nil, fmt.Errorf("%w: %v", ErrWeatherAPIRequest, err)
 	}
 	defer resp.Body.Close()
 
+	// Print debug information
+	fmt.Printf("WeatherAPI Response: Status=%d\n", resp.StatusCode)
+
 	if resp.StatusCode == http.StatusNotFound || resp.StatusCode >= 400 {
+		body, _ := io.ReadAll(resp.Body)
+		fmt.Printf("WeatherAPI Error Response: %s\n", string(body))
 		return nil, ErrCityNotFound
 	}
 

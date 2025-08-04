@@ -23,6 +23,11 @@ func main() {
 
 	// Set up routes
 	http.HandleFunc("/weather", handlers.HandleWeatherByCEP)
+	
+	// Debug information
+	http.HandleFunc("/debug", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprintf(w, "API Key: %s", cfg.WeatherAPIKey)
+	})
 
 	// Start server
 	addr := fmt.Sprintf(":%s", cfg.Port)
