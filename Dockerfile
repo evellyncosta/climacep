@@ -15,7 +15,7 @@ COPY . .
 RUN CGO_ENABLED=0 GOOS=linux go build -o climacep ./cmd/api
 
 # Use a small alpine image for the final image
-FROM alpine:latest
+FROM alpine:latest AS final
 
 WORKDIR /app
 

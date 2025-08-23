@@ -60,7 +60,7 @@ func (h *Handlers) HandleWeatherByCEP(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Get weather information by city
-	weather, err := h.weatherService.GetWeatherByCity(location.Localidade)
+	weather, err := h.weatherService.GetWeatherByCity(location.Localidade + ", " + location.UF)
 	if err != nil {
 		if errors.Is(err, services.ErrCityNotFound) {
 			writeJSONError(w, "City not found in weather API", http.StatusNotFound)
