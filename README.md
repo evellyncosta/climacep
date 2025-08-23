@@ -2,7 +2,7 @@
 
 ClimaCEP is a Go application that receives a Brazilian ZIP code (CEP), identifies the city, and returns the current weather temperature in Celsius, Fahrenheit, and Kelvin.
 
-LINK https://climacep-2okhjstqda-uc.a.run.app/
+LINK https://climacep-20545108858.us-central1.run.app
 
 ## Features
 
