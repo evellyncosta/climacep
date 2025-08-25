@@ -4,6 +4,22 @@ ClimaCEP is a Go application that receives a Brazilian ZIP code (CEP), identifie
 
 LINK https://climacep-20545108858.us-central1.run.app
 
+**Example Request:**
+
+```bash
+curl -X GET "https://climacep-20545108858.us-central1.run.app/weather?cep=01001000"
+```
+
+**Success Response (200 OK):**
+
+```json
+{
+  "temp_C": 28.5,
+  "temp_F": 83.3,
+  "temp_K": 301.5
+}
+```
+
 ## Features
 
 - Validates Brazilian ZIP codes (CEP)
@@ -54,22 +70,6 @@ Fetches weather information based on a Brazilian ZIP code (CEP).
 **Query Parameters:**
 
 - `cep` (required): The Brazilian ZIP code (CEP) to lookup
-
-**Example Request:**
-
-```bash
-curl -X GET "https://climacep-20545108858.us-central1.run.app/weather?cep=01001000"
-```
-
-**Success Response (200 OK):**
-
-```json
-{
-  "temp_C": 28.5,
-  "temp_F": 83.3,
-  "temp_K": 301.5
-}
-```
 
 **Error Responses:**
 
